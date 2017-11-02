@@ -54,3 +54,4 @@ var calc = new calculator();
 console.log(calc.add(10)());
 console.log(calc.subtract(5));
 console.log(calc.getResult());
+//12;
