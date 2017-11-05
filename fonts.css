@@ -1,0 +1,23 @@
+h1 {
+    font-family: "Georgia";
+}
+
+#author{
+    font-family: "Arial";
+}
+
+p {
+    font-family: "Courier New";
+}
+
+q {
+    font-family: "Lucida Console";
+}
+
+.subtitle {
+    font-family: "Verdana";
+}
+
+body {
+    background-image: url(wall.jpg);
+   }
