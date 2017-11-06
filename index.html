@@ -18,10 +18,17 @@
                 <p><label for="website">Website:</label></p>
                 <p><label for="message">Message:</label></p>
           </div>
-          <p><input type="text" id="name" autofocus></p>
-          <p><input type="email" id="email" required></p>
-          <p><input type="url" id="website" required></p>
-          <p><textarea id="message" rows = 2 cols = 25></textarea></p>
+          <div class = "labels">
+                <p><input type="text" id="name" placeholder="Name" autofocus></p>
+                <p><input type="email" id="email" placeholder="E-mail" required></p>
+                <p><input type="url" id="website" placeholder="Website" required></p>
+                <p><textarea id="message" placeholder="Message" rows = 2 cols = 25></textarea></p>
+          </div>
+          <div class = "hints">
+                </br></br>
+                <p class = "hint">Hint for E-mail</p>
+                <p class = "hint">Hint for Website</p>
+          </div>
         </fieldset>
         <p><input type="submit" value="Submit"></p>
       </form>
