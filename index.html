@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"> 
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <title>Form</title>
+  </head>
+  <body>
+    <header>
+        <p class = "title">Form here</p>
+        <p class = "required">* - required fields</p>
+    </header>
+    <form>
+        <fieldset>
+          <div class = "labels">
+                <p><label for="name">Name:</label></p>
+                <p><label for="email">E-mail:</label></p>
+                <p><label for="website">Website:</label></p>
+                <p><label for="message">Message:</label></p>
+          </div>
+          <p><input type="text" id="name" autofocus></p>
+          <p><input type="email" id="email" required></p>
+          <p><input type="url" id="website" required></p>
+          <p><textarea id="message" rows = 2 cols = 25></textarea></p>
+        </fieldset>
+        <p><input type="submit" value="Submit"></p>
+      </form>
+  </body>
+</html>
