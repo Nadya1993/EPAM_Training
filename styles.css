@@ -35,19 +35,20 @@ input[type="submit"] {
 .hints {
     margin-right: 30px;
     float: left;
-    line-height: 1.8;
+    line-height: 1.6;
 }
 
 .hint{
     background-color: red;
     padding: 3px;
+    display: inline-block;
 }
 
 .arrow-left {
+    display: inline-block;
     width: 0; 
     height: 0; 
-    border-top: 3px solid transparent;
-    border-bottom: 3px solid transparent; 
-    
-    border-right:3px solid red; 
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent; 
+    border-right:5px solid red; 
   }
