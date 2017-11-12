@@ -11,27 +11,26 @@
         <p class = "required">* - required fields</p>
     </header>
     <form>
-        <fieldset>
-          <div class = "labels">
-                <p><label for="name">Name:</label></p>
-                <p><label for="email">E-mail:</label></p>
-                <p><label for="website">Website:</label></p>
-                <p><label for="message">Message:</label></p>
-          </div>
-          <div class = "labels">
-                <p><input type="text" id="name" placeholder="Name" autofocus></p>
-                <p><input type="email" id="email" placeholder="E-mail" required></p>
-                <p><input type="url" id="website" placeholder="Website" required></p>
-                <p><textarea id="message" placeholder="Message" rows = 2 cols = 25></textarea></p>
-          </div>
-          <div class = "hints">
-                </br></br>
-                <p><div class = "arrow-left"></div><!--
-                --><div class = "hint">Hint for E-mail</div></p>
-                <p><div class = "arrow-left"></div><!--
-                --><div class = "hint">Hint for Website</div></p>
-          </div>
-        </fieldset>
+        <div>
+            <p><label for="name">Name:</label></p>
+            <p><input type="text" id="name" placeholder="Name" autofocus></p>
+        </div>
+        <div>
+            <p><label for="email">E-mail:</label></p>
+            <p><input type="email" id="email" placeholder="E-mail" required></p>
+            <p><div class = "arrow-left"></div><!--
+            --><div class = "hint">Hint for E-mail</div></p>
+        </div>
+        <div>
+            <p><label for="website">Website:</label></p>
+            <p><input type="url" id="website" placeholder="Website" required></p>
+            <p><div class = "arrow-left"></div><!--
+            --><div class = "hint">Hint for Website</div></p>
+        </div>
+        <div>
+            <p><label for="message">Message:</label></p>
+            <p><textarea id="message" placeholder="Message" rows = 2 cols = 25></textarea></p>
+        </div>
         <p><input type="submit" value="Submit"></p>
       </form>
   </body>

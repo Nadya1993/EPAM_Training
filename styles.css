@@ -1,46 +1,49 @@
 .required {
-    color : red;
+    color : #8B0000;
     font-size: 8pt;
-    line-height: 0.1;
+    border-bottom-width: 1px;
+    border-bottom-color: black;
+    border-bottom-style: solid;
+    margin: auto;
 }
 
 .title {
     font-size: 16pt;
     font-weight: bold;
-    line-height: 0.1;
+    margin: auto;
 }
 
 body {
     font-family: system-ui;
     font-size: 10pt;
+    padding-left: 10px;
 }
 
 textarea, input {
     padding: 4px;
     font-family: system-ui;
     font-size: 9pt;
+    border-radius: 5px;
+    border: 1px solid;
+    border-color: #696969;
 }
 
 input[type="submit"] {
-    padding: 5px 25px;
+    padding: 7px 35px;
     margin-left: 100px;
+    border-radius: 5;
 }
-
-.labels {
-    margin-right: 30px;
-    float: left;
-    line-height: 2;
-}
-
-.hints {
-    margin-right: 30px;
-    float: left;
-    line-height: 1.6;
+div > p {
+    display: inline-block;
+    width: 65px; 
+    vertical-align: middle;
+    margin-right: 20px;
 }
 
 .hint{
-    background-color: red;
-    padding: 3px;
+    background-color: #B22222;
+    color: white;
+    padding: 3px 9px;
     display: inline-block;
 }
 
@@ -50,5 +53,5 @@ input[type="submit"] {
     height: 0; 
     border-top: 5px solid transparent;
     border-bottom: 5px solid transparent; 
-    border-right:5px solid red; 
+    border-right:5px solid #B22222; 
   }
