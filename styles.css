@@ -1,0 +1,5 @@
+img {
+    zoom:50%;
+    clip-path: circle(500px);
+    /* border-radius: 70%; */
+}
