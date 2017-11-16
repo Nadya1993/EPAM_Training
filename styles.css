@@ -1,6 +1,6 @@
 img {
     zoom:50%;
-    clip-path: circle(500px);
+    clip-path: circle(400px);
     /* border-radius: 70%; */
 }
 
@@ -27,4 +27,11 @@ header {
 
 .search[type = button]{
     background-image: url(glass.png);
+}
+
+@media screen and (max-width: 800px){
+    img {
+        zoom:30%;
+        clip-path: circle(200px);
+    }
 }
