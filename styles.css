@@ -1,3 +1,7 @@
+body {
+    margin: 0px;
+}
+
 .headContainer {
     background-color: #151515;
     position: fixed;
@@ -87,12 +91,12 @@
 
 .banner{
     background-color: #BEF781;
-    position: absolute;
+    position: relative;
     top:50px;
-    left: 0px;
+    left: 0;
     height: 230px;
-    width: 100%;
-    padding: 65px 80px 10px; 
+    padding-left: 80px; 
+    padding-top: 65px;
     color: #0B610B;
 }
 
@@ -110,7 +114,7 @@
     padding: 10px 0px;
 }
 
-#engageButton{
+.engageButton{
     padding: 9px 17px;
     border: 1px outset #0B610B;
     border-radius: 5px;
@@ -119,18 +123,18 @@
     outline: none;
 }
 
-#engageButton:hover{
-    border:0px;
+.engageButton:hover{
+    background-color: #A9F5D0;
 }
 
-#engageButton:active{
-    background-color: #D0F5A9;
+.engageButton:active{
+    background-color: #088A29;
 }
 
 .table{
-    position: absolute;
-    top:350px;
-    padding: 55px 80px 10px; 
+    position: relative;
+    padding: 55px 80px 5px;
+    margin-top: 30px; 
 }
 
 .tableTitle > p:first-child{
@@ -146,7 +150,7 @@
     font-size: 24pt;
 }
 
-.tableTitle > p:nth-child(2n){
+.tableTitle > p:nth-child(2n), .footer > p:nth-child(2n){
     color: #848484;
 }
 
@@ -161,21 +165,24 @@
     margin: 40px 0px;
 }
 
+a{
+    text-decoration: none;
+}
+
 .tableLine a{
     float: left;
-    text-decoration: none;
     color: #0040FF;
     font-size: 20pt;
 }
 
-.tableLine a:hover{
+.tableLine a:hover, .footer a:hover{
     text-decoration: underline;
     color: #0B0B3B;
 }
 
 .tableLine > div{
     display: inline-block;
-    width: 370px;
+    width: 330px;
 }
 
 .tableCellLeft{
@@ -192,4 +199,61 @@
 
 img{
     width: inherit;
+}
+
+.footerColor{
+    background-color: #FE9A2E;
+    padding: 3px 100px 5px;
+}
+
+.footerColor p{
+    color: black;
+}
+
+.footerColor p:first-child{
+    font-size: 20pt;
+}
+
+.footerColor .tableLine > div{
+    width: 340px;
+}
+
+.footerColor #f1::before{
+    content: "\262D";
+    padding-right: 10px;
+    font-size: 40px;
+    font-weight: bold;
+}
+.footerColor #f2::before{
+    content: "\2622";
+    padding-right: 10px;
+    font-size: 40px;
+    font-weight: bold;
+}
+.footerColor #f3::before{
+    content: "\2605";
+    padding-right: 10px;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.footer{
+    padding: 30px 80px;
+}
+
+.search{
+    position: absolute;
+    top:13px;
+    right: 200px;
+    padding: 4px 7px;
+    border-radius: 5px;
+    border: 1px solid #151515;
+    outline: none;
+}
+
+.search ~ .engageButton{
+    position: absolute;
+    top:10px;
+    right: 80px;
+    padding: 7px 25px;
 }
