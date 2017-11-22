@@ -1,0 +1,60 @@
+#animation{
+    background-color: #E0FFFF;
+    border: 1px solid #8B0000;
+    height: 500px;
+    width: 800px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    background: radial-gradient(circle, #FFFFE0, #F4A460);
+}
+
+#cube{
+    height: 90px;
+    width: 90px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bolder;
+    border: none;
+    outline: none;
+    background: radial-gradient(circle, #FFFFE0, #F4A460);
+    animation-name: infinitive;
+    animation-duration: 5000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+#cube:hover{
+    background: radial-gradient(circle, #FFFFE0, #00FFFF);
+}
+
+#cube:active{
+    background: radial-gradient(circle, #FFFFE0, #008B8B);
+}
+
+@keyframes infinitive {
+    0% {
+        transform:rotate(0deg);
+    }
+    25%{
+        margin-left: 670px;
+    }
+    50% {
+        transform:rotate(180deg);
+        border-radius: 50%;
+        box-shadow: 0 -100px 50px -50px #ADD8E6 inset,
+        0 -150px 50px -50px #1E90FF inset;
+        height: 150px;
+        width: 150px;
+        margin-top: 350px;
+        margin-left: 0px;
+    }
+    75%{
+        margin-left: -670px;
+    }
+    100% {
+        transform:rotate(360deg);
+        border-radius: 0%;
+        margin-top: 20px;
+    }
+  }
