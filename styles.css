@@ -1,60 +1,57 @@
-#animation{
-    background-color: #E0FFFF;
-    border: 1px solid #8B0000;
-    height: 500px;
-    width: 800px;
-    margin: auto;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    background: radial-gradient(circle, #FFFFE0, #F4A460);
+/* body{
+    margin: 0px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    position: relative;
+} */
+
+.navigation-bar {
+    position: relative;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 50px;
+    background-color: #FFDAB9;
+}   
+
+.menu{
+    position: absolute;
+    margin: 5px;
+    z-index: 3;
 }
 
-#cube{
-    height: 90px;
-    width: 90px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-weight: bolder;
+#menu{
+    zoom: 8%;
+}
+
+.menu-btn{
     border: none;
+    border-radius: 50%;
+    background-color: #FFDAB9;
+    cursor: pointer;
     outline: none;
-    background: radial-gradient(circle, #FFFFE0, #F4A460);
-    animation-name: infinitive;
-    animation-duration: 5000ms;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
 }
 
-#cube:hover{
-    background: radial-gradient(circle, #FFFFE0, #00FFFF);
+.menu-content {
+    display: none;
+    flex-direction: column;
+    background-color: #FFFFE0;
+    min-width: 280px;
+    margin-top: 5px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 }
 
-#cube:active{
-    background: radial-gradient(circle, #FFFFE0, #008B8B);
+.menu:hover .menu-content{
+    display: flex;
 }
 
-@keyframes infinitive {
-    0% {
-        transform:rotate(0deg);
-    }
-    25%{
-        margin-left: 670px;
-    }
-    50% {
-        transform:rotate(180deg);
-        border-radius: 50%;
-        box-shadow: 0 -100px 50px -50px #ADD8E6 inset,
-        0 -150px 50px -50px #1E90FF inset;
-        height: 150px;
-        width: 150px;
-        margin-top: 350px;
-        margin-left: 0px;
-    }
-    75%{
-        margin-left: -670px;
-    }
-    100% {
-        transform:rotate(360deg);
-        border-radius: 0%;
-        /* margin-top: 20px; */
-    }
-  }
+.menu-content a {
+    text-decoration: none;
+    color: #CD5C5C;
+    font-size: 20px;
+    padding: 5px 20px;
+    font-weight: bold;
+}
+
+.menu-content a:hover {
+    background-color: #FFDAB9
+}
