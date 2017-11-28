@@ -34,13 +34,13 @@
 }
 
 
-.article{
-    margin: 50px 200px;
+/* .article{
+    margin: 10px 5%;
     padding: 0px;
     border: 7px double #800000;
     border-radius: 5px;
     text-align: justify;
-}
+} */
 
 .article p{
     margin: 0px;
@@ -63,3 +63,10 @@
     border-right: 7px solid transparent;
     border-top: 7px solid #FFDAB9;
   }
+
+
+  /* @media screen and (max-width: 700px){
+    .article p:first-child{
+    background: red;
+    }
+}*/

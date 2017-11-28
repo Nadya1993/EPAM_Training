@@ -11,7 +11,14 @@ var styleObject = {
     "min-width": "280px",
     "margin-top": "5px",
     "box-shadow": "0px 8px 16px 0px rgba(0,0,0,0.2)"
-  }
+  },
+  article : {
+    margin: "10px 5%",
+    padding: "0px",
+    border: "7px double #800000",
+    "border-radius": "5px",
+    "text-align": "justify"
+}
 }
 
 function hoverMenuItem(event) {
@@ -43,6 +50,12 @@ function loadingStyles(){
     [].forEach.call(link, function(item){
         item.style.background = "#FFFFE0";
     });
+
+    var articleDiv = document.getElementsByClassName("article");
+    for(var key in styleObject.article){
+        articleDiv[0].style[key] = styleObject.article[key];
+    }  
+    //document.querySelector('style').textContent += "@media screen and (max-width:700px) {.article p:first-child{background: red;}}"; //тоже не работает
 }
 
 function menuShow(){
