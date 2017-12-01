@@ -11,7 +11,6 @@ var Calculator = function(){
             }
         };
     };
-    //123
     this.subtract = function(value1){
         buffer -= value1;
         return function(value2){
@@ -58,55 +57,3 @@ console.log(calc.add(5)(10));
 console.log(calc.add(5)());
 console.log(calc.result());
 console.log(calc.reset());
-
-
-/*
-function calculator(){
-    buffer = 0;
-    return {
-        add : function (value1){
-            return function(value2){
-                if (value2){
-                    return buffer = value1 + value2;
-                }
-                else {
-                    return buffer += value1;
-                }
-            }
-        }, 
-        deduct : function (value1){
-            return function(value2){
-                if (value2){
-                    return buffer = value1 - value2;
-                }
-                else {
-                    return buffer -= value1;
-                }
-            }
-        }, 
-        multiply : function (value1){
-            return function(value2){
-                if (value2){
-                    return buffer = value1 * value2;
-                }
-                else {
-                    return buffer *= value1;
-                }
-            }
-        }, 
-        divide : function (value1){
-            return function(value2){
-                if (value2){
-                    return buffer = value1 / value2;
-                }
-                else {
-                    return buffer /= value1;
-                }
-            }
-        } 
-    }
-}
-
-var calc = new calculator();
-console.log(calc.deduct(10)(8));
-console.log(calc.divide(2)());*/
