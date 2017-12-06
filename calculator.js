@@ -82,35 +82,34 @@ function init(){
     buttons.forEach(function(elem, i){
     var button = document.createElement("button");
     button.innerHTML = elem;
-    button.setAttribute("class", "btn");
     switch (elem){
       case "=":
         button.style["width"] = "300px";
         // button.addEventListener("click", getResult);
-        button.setAttribute("class", "equal");
+        button.setAttribute("class", "btn equal");
         break;
       case "C":
         // button.addEventListener("click", reset);
-        button.setAttribute("class", "clear");
+        button.setAttribute("class", "btn clear");
         break;
       case ".":
         // button.addEventListener("click", setDot);
-        button.setAttribute("class", "dot");
+        button.setAttribute("class", "btn dot");
         break;
       case "+":
-        button.setAttribute("class", "add");
+        button.setAttribute("class", "btn add");
         break;
       case "-":
-        button.setAttribute("class", "subtract");
+        button.setAttribute("class", "btn subtract");
         break;
       case "*":
-        button.setAttribute("class", "multiple");
+        button.setAttribute("class", "btn multiple");
         break;
       case "/":
-        button.setAttribute("class", "divide");
+        button.setAttribute("class", "btn divide");
         break;
       default:
-      button.setAttribute("class", "number");
+      button.setAttribute("class", "btn number");
     }
     calcItem.appendChild(button);
   });
@@ -122,16 +121,29 @@ function init(){
       items : ["", ""],
       currentItem : 0,
       currentOperation : null,
-      currentAction : true //вводим цифры
+      currentAction : true, //вводим цифры, false - операция
+      hasDot : false //следим за наличием точки
     };
   };
 
   var state = new StartState();
 
-  document.querySelectorAll(".calculator").forEach(function(el){
+//   document.getElementById("contaner").addEventListener("click", function(){
+//     console.log("yyy" + this);
+//     if (event.target.parentNode.className === "calculator"){
+//         console.log("yyy" + this);
+//     }
+
+//   })
+
+  document.querySelectorAll(".calculator").forEach(function(el, i, arr){
     el.addEventListener("click", function(){
-      if (document.querySelector(".btn .dot")){
-        console.log("www");
+      var field = el.querySelectorAll(".field");
+      console.log("field: " + field.length)
+      var numbers = el.getElementsByClassName(event.target.className);
+      if (event.target.className === "btn number" ){
+          console.log("numbers: " + numbers[8].innerHTML)
+          field[0].value += event.target.innerHTML;
       }
     })
   });
@@ -175,9 +187,6 @@ function init(){
     field.value = "";
     state = new StartState();
   }
-
-
-  document.querySelector
   
   // buttons.forEach(function(elem, i){
   //   var button = document.createElement("button");
@@ -201,16 +210,16 @@ function init(){
   // });
 
   
-  function setExpression(){
+  function setExpression(somButton){
     var field = this.parentNode.querySelector(".field");
-    if (field.value != "" 
-        && ((field.value[0]=="-")?field.value.slice(1):field.value).match(/[\-\:\*\+]/) != null 
-        && this.innerHTML.match(/[\-\:\*\+]/) != null){
-        getResult();
-        field.value += this.innerHTML;
-    }
-    else if (!(this.innerHTML.match(/[\:\*\+]/) != null && field.value == ""))
-      field.value += this.innerHTML;
+    // if (field.value != "" 
+    //     && ((field.value[0]=="-")?field.value.slice(1):field.value).match(/[\-\:\*\+]/) != null 
+    //     && this.innerHTML.match(/[\-\:\*\+]/) != null){
+    //     getResult();
+    //     field.value += this.innerHTML;
+    // }
+    // else if (!(this.innerHTML.match(/[\:\*\+]/) != null && field.value == ""))
+    field.value += event.target.innerHTML;
   }
 
   // function setDot(){
