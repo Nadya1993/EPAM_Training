@@ -53,16 +53,16 @@ var Calculator = function(){
 }
 
 function init(){
-  var calc = new Calculator();
 
-  var contaner = document.getElementById("contaner");
+  //new calculator interface
+  var container = document.getElementById("container");
   var calcItem = document.createElement('div');
   calcItem.setAttribute('class', 'calculator');
 
   var id = document.getElementsByClassName("calculator").length;
   calcItem.setAttribute('id', id+1);
 
-  contaner.appendChild(calcItem);
+  container.appendChild(calcItem);
   var field = document.createElement("input");
   field.setAttribute("type", "text");
   field.setAttribute("placeholder", "0");
@@ -115,8 +115,8 @@ function init(){
     calcItem.appendChild(button);
   });
 
-
-  var StartState = function(){ // controller
+ // controller
+  var StartState = function(){ 
     return {
       items : ["", ""],
       currentItem : 0,
@@ -127,17 +127,16 @@ function init(){
   };
 
 var state = new StartState();
+//new calculator
+var calc = new Calculator();
 
-function f(event){
-    var field = this.querySelector(".field");
-    // var numbers = this.getElementsByClassName(event.target.className);
-    // console.log("id el: " + this.id);
-    // console.log("id: " + event.target.parentNode.id);
+  function debounce(event){ //!!!
+    var fieldInput = event.target.parentNode.querySelector(".field");
 
     function equal(){
         if (state.items[0] != "" && state.items[1] != ""){
             state.currentOperation(state.items[1]);
-            field.value = calc.result();
+            fieldInput.value = calc.result();
             state.items[0] = calc.result();
             state.items[1] = "";
             state.currentOperation = null;
@@ -147,7 +146,7 @@ function f(event){
     };
 
     function setOperationState(){
-        field.value += event.target.innerHTML;
+        fieldInput.value += event.target.innerHTML;
         state.currentItem = 1;
         state.currentAction = false;
         state.hasDot = false;
@@ -155,7 +154,7 @@ function f(event){
 
     switch (event.target.className){
         case "btn number":
-          field.value += event.target.innerHTML;
+          fieldInput.value += event.target.innerHTML;
           state.items[state.currentItem] += event.target.innerHTML;
           state.currentAction = true;
           break;
@@ -196,14 +195,14 @@ function f(event){
           break;
         case "btn clear":
           calc.reset();
-          field.value = "";
+          fieldInput.value = "";
           state = new StartState();
           break;
         case "btn dot":
           if (state.hasDot == false){
               state.hasDot = true;
               state.items[state.currentItem] += event.target.innerHTML;
-              field.value += event.target.innerHTML;
+              fieldInput.value += event.target.innerHTML;
             break;
           }
       }
@@ -211,7 +210,7 @@ function f(event){
   }
 
   document.querySelectorAll(".calculator").forEach(function(el, i, arr){
-    el.addEventListener("click", f);
+    event.target.addEventListener("click", debounce);
   });
 
 }
