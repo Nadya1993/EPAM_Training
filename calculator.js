@@ -210,6 +210,3 @@ function init(){
   var newCalcEntity = calcEntity();
   newCalc.addEventListener("click", newCalcEntity);
 }
-
-
-
