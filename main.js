@@ -12,8 +12,13 @@ function loadMap() {
       type: "GET",
       contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
       success: function(resultData) {
+        if (resultData.status == "ZERO_RESULTS") {
+          alert ("Please enter a correct address data!")
+        }
+        else {
           document.querySelector(".result").innerHTML = "Latitude: " + resultData.results[0].geometry.location.lat.toFixed(2)  
           + "; Longitude: " + resultData.results[0].geometry.location.lng.toFixed(2);
+        };
       },
       error : function(jqXHR, textStatus, errorThrown) {
         alert("Something goes wrong: " + textStatus);
