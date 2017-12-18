@@ -1,0 +1,33 @@
+.container{
+    /* position: relative; */
+    width: 700px;
+    padding: 20px 10px; 
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.search_field{
+    margin: 8px;
+    padding: 3px;
+    width: 200px;
+    height: 20px;
+    border-radius: 4px;
+    border: 2px #191970 solid;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.map_btn{
+    width: 200px;
+    height: 50px;
+    margin: 15px;
+    border-radius: 4px;
+    border: 2px #191970 solid;
+}
+
+.result{
+    margin-top: 15px;
+    font-size: 18pt;
+    font-weight: bolder;
+}

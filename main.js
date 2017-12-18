@@ -1,15 +1,25 @@
+//AIzaSyCHQreOyVTeIunKEZIFzCCCrrTdO_Af8hk
+
 function loadMap() {
-    var xhr = new XMLHttpRequest();
+    var searchQuery = {
+      city : document.querySelector("#city").value,
+      street : document.querySelector("#street").value,
+      structure : document.querySelector("#structure").value
+    };
 
-    xhr.open('GET', 'http://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=AIzaSyAdrZuFXlo3OoE2XXEH5d0smdoPhE6EKXk', true);
-    xhr.send();
+    jQuery.ajax({
+      url: 'https://maps.googleapis.com/maps/api/geocode/json?address='+searchQuery.city+',+'+searchQuery.street+',+'+searchQuery.structure+'&key=AIzaSyCHQreOyVTeIunKEZIFzCCCrrTdO_Af8hk',
+      type: "GET",
+      contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
+      success: function(resultData) {
+          document.querySelector(".result").innerHTML = "Latitude: " + resultData.results[0].geometry.location.lat.toFixed(2)  
+          + "; Longitude: " + resultData.results[0].geometry.location.lng.toFixed(2);
+      },
+      error : function(jqXHR, textStatus, errorThrown) {
+        alert("Something goes wrong: " + textStatus);
+      },
 
-    if (xhr.status != 200) {
-      // обработать ошибку
-      alert('Ошибка ' + xhr.status + ': ' + xhr.statusText);
-    } else {
-      // вывести результат
-      alert(xhr.responseText);
-    }
+      timeout: 12000,
+  });
+
   }
-
