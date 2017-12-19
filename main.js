@@ -7,6 +7,8 @@ function loadMap() {
       structure : document.querySelector("#structure").value
     };
 
+    localStorage.setItem('myCat', 'Tom');
+
     jQuery.ajax({
       url: 'https://maps.googleapis.com/maps/api/geocode/json?address='+searchQuery.city+',+'+searchQuery.street+',+'+searchQuery.structure+'&key=AIzaSyCHQreOyVTeIunKEZIFzCCCrrTdO_Af8hk',
       type: "GET",
