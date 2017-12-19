@@ -16,15 +16,17 @@ function loadMap() {
           alert ("Please enter a correct address data!")
         }
         else {
-          document.querySelector(".result").innerHTML = "Latitude: " + resultData.results[0].geometry.location.lat.toFixed(2)  
-          + "; Longitude: " + resultData.results[0].geometry.location.lng.toFixed(2);
+          document.querySelector(".result").innerHTML = "https://www.google.ru/maps/@" + resultData.results[0].geometry.location.lat + "," + resultData.results[0].geometry.location.lng + ",7.75z";
+          document.querySelector(".result").href = "https://www.google.ru/maps/@" + resultData.results[0].geometry.location.lat + "," + resultData.results[0].geometry.location.lng + ",7.75z";
+          // "Latitude: " + resultData.results[0].geometry.location.lat.toFixed(2)  
+          // + "; Longitude: " + resultData.results[0].geometry.location.lng.toFixed(2);
         };
       },
       error : function(jqXHR, textStatus, errorThrown) {
         alert("Something goes wrong: " + textStatus);
       },
 
-      timeout: 12000,
+      timeout: 12000
   });
 
   }
