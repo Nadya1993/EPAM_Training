@@ -14,49 +14,62 @@ function uuid() {
 
 
 function ListAction() {
-  localStorage.setItem("toDoList", '[]');
-  var itemArr = JSON.parse(localStorage["toDoList"]);
+  localStorage.setItem("toDoList", '{}');
+  var itemArr = JSON.parse(localStorage.getItem("toDoList"));
   return {
     add : function(item){
-      alert(item)
-      itemArr.push({"id" : uuid(), "title" : item, "status" : 0});
+      if (item){
+        itemArr[uuid()] = {"title" : item, "status" : false};
+        localStorage.setItem("toDoList", JSON.stringify(itemArr));
+      }
+    },
+    setStatusAll : function(status){
+      if (typeof status == "boolean"){
+        for (key in itemArr){
+          itemArr[key]["status"] = status;
+        };
+        localStorage.setItem("toDoList", JSON.stringify(itemArr));
+      }
+    },
+    setStatus : function(id){
+      itemArr[id]["status"] = !(itemArr[id]["status"]);
       localStorage.setItem("toDoList", JSON.stringify(itemArr));
     },
-    selectAll : function(){
-      itemArr.forEach(function(element) {
-        element.status = 1;
-      });
+    deleteItem : function(id){
+      delete itemArr[id];
+      localStorage.setItem("toDoList", JSON.stringify(itemArr));
     },
-    unselectAll : function(){
-      itemArr.forEach(function(element) {
-        element.status = 0;
-      });
+    deleteAllItems : function(){
+      for (key in itemArr){
+        delete itemArr[key];
+      };
+      localStorage.setItem("toDoList", JSON.stringify(itemArr));
     }
   }
 }
 
-// var elem = new ListAction();
-// elem.add("qqq");
-// elem.add("222");
+var getTask = function (func){
+  return function(){
+    var key = event.which || event.keyCode;
+    if (key === 13) { 
+      return func(document.querySelector(".todos_input").value);
+    }
+  }
+}
 
-
-
-function deb(func, value){
-   return function(){
-     alert(func)
-     alert(value)
-    return func(value);
+var getTask1 = function (func){
+  return function(){
+    return func();
    }
 }
+  
 
 
 function init(){
   var elem = new ListAction();
-  function f(){
-    alert(document.querySelector(".input").value)
-  }
-  var askingDebounce = deb(elem.add, document.querySelector(".input").value);
-  document.querySelector(".add").addEventListener("click", askingDebounce);
-  document.querySelector(".add").addEventListener("click", f);
+  var askingTask = getTask(elem.add);
+  document.addEventListener('keypress', askingTask);
+  var askingID = getTask1(elem.deleteAllItems);
+  document.querySelector(".idd").addEventListener("click", askingID);
 }
 
