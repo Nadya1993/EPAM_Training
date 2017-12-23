@@ -7,18 +7,24 @@
     align-items: center;
 }
 
+#wrapper{
+    display: flex;
+    flex-direction: column-reverse;
+    width: 400px;
+}
+
+.item{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 400px;
+}
+
 .for_input{
     width: 400px;
     height: 50px;
     border: 1px solid black;
-}
-
-.add{
-    width: 50px;
-    height: 20px;
-    margin: 15px;
-    border-radius: 4px;
-    border: 2px black solid;
 }
 
 .todos_input{
@@ -27,4 +33,5 @@
     padding: 5px;
     border: none;
     outline: none;
+    margin: 6px;
 }
