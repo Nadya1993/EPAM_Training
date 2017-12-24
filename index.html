@@ -5,22 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src = "main.js"></script>
-    <script src="http://wzrd.in/standalone/uuid%2Fv4@latest"></script>
     <link rel="stylesheet" type="text/css" href="styles.css">
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-    
-    <title>Map</title>
+    <title>ToDoList</title>
 </head>
 <body onload="init();">
     <div class = "container">
+        <span id = "todosText">todos</span>
         <div class = "for_input">
-            <button class = "add">ChB</button>
+            <input type = "checkbox" class = "statusAll"/>
             <input type="text" class = "todos_input" placeholder="What needs to be done?"/>
         </div>
         <div id = "wrapper">
 
         </div>
-        <button class = "idd">idd</button>
+        <div id = "infoButtons">
+            <span id = "undone">Active tasks: </span>
+            <label><input type="radio" class = "all">Show All</label>
+            <label><input type="radio" class = "active">Active</label>
+            <label><input type="radio" class = "completed">Completed</label>
+            <button id = "delete">Delete Completed</button>
+        </div>
     </div>
 </body>
 </html>

@@ -1,3 +1,10 @@
+#todosText{
+    color:#CD5C5C;
+    font-weight: bolder;
+    font-size: 44pt;
+    font-family: sans-serif;
+}
+
 .container{
     width: 700px;
     padding: 20px 10px; 
@@ -5,26 +12,35 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 
 #wrapper{
     display: flex;
     flex-direction: column-reverse;
     width: 400px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 
-.item{
+#infoButtons{
+    display: flex;
+    flex-direction: row;
+    width: 600px;
+    height: 50px;
+    align-items: center;
+    justify-content: center;
+    color: #696969;
+}
+
+.item, .for_input{
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
     width: 400px;
-}
-
-.for_input{
-    width: 400px;
     height: 50px;
-    border: 1px solid black;
+    border: 1px solid #D3D3D3;
+    color:#2F4F4F;
 }
 
 .todos_input{
@@ -35,3 +51,73 @@
     outline: none;
     margin: 6px;
 }
+
+#delete{
+    border:none;
+    outline: none;
+    background: white;
+    border-bottom:1px solid white;
+    margin: 3px;
+    margin-left: 25px;
+    color: #696969;
+}
+
+#undone{
+    color:#808080;
+    margin-right: 25px;
+}
+
+label{
+    margin: 3px 5px;
+}
+
+#delete:hover, label:hover{
+    border-bottom:1px solid #A9A9A9;
+}
+#delete:active{
+    border-bottom:1px solid #A9A9A9;
+}
+
+input[type="checkbox"]{
+    width: 20px;
+    height: 20px;
+    border-radius: 10%;
+    margin: 10px;
+}
+
+input[type="radio"]{
+    visibility: hidden;
+}
+
+input[type="radio"]:hover{
+    visibility: visible;
+}
+
+input[type="radio"]:checked{
+    visibility: visible;
+}
+
+.item > input[type="checkbox"]:checked ~ .item_text{
+    text-decoration: line-through;
+}
+
+.item_delete{
+    background: white;
+    border: none; 
+    border-radius: 10px;
+    box-shadow: none;
+    font-weight: bold;
+    color: #CD5C5C;
+    visibility: hidden;
+    outline: none;
+    margin-left: auto;
+    margin-right: 1em;
+}
+
+.item:hover .item_delete {
+    visibility: visible;
+}
+.item_delete:hover, .item_delete:active{
+    color: red;
+}
+
