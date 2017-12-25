@@ -101,6 +101,10 @@ input[type="radio"]:checked{
     text-decoration: line-through;
 }
 
+.item_field{
+    width: 200px;
+}
+
 .item_delete{
     background: white;
     border: none; 
