@@ -62,17 +62,20 @@ var ItemEntity = function (id){ //отрисовка задачи
   var editItem = function(){
     item_text.hidden = true;
     item_field.hidden = false;
+    item_field.value = item_text.innerHTML;
   };
 
   var saveNewValue = function(){
     var key = event.which || event.keyCode;
-    if (key === 13 && item_field !== ""){
+    if (key === 13){
       item_text.hidden = false;
       item_field.hidden = true;
-      itemList[id]["title"] = item_field.value;
-      localStorage.setItem("toDoList", JSON.stringify(itemList));
-      item_text.innerHTML = item_field.value;
-      item_field.value = "";
+      if (item_field.value !== ""){
+        itemList[id]["title"] = item_field.value;
+        localStorage.setItem("toDoList", JSON.stringify(itemList));
+        item_text.innerHTML = item_field.value;
+        item_field.value = "";
+      }
     }
   };
 
