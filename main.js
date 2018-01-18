@@ -14,8 +14,7 @@ var itemList = JSON.parse(localStorage.getItem("toDoList"));
 var showingState = JSON.parse(localStorage.getItem("toDoListShowState"));
 
 var ListAction = function() { // определяем возможные действия над листом
-  return {
-    add : function(item){
+  this.add = function(item){
       if (item){
         var id = uuid();
         if (itemList == null) {
@@ -26,16 +25,16 @@ var ListAction = function() { // определяем возможные дей�
         localStorage.setItem("toDoList", JSON.stringify(itemList));
         return id;
       }
-    },
-    setStatusAll : function(status){
+    };
+  this.setStatusAll = function(status){
       if (typeof status == "boolean"){
         for (key in itemList){
           itemList[key]["status"] = status;
         };
         localStorage.setItem("toDoList", JSON.stringify(itemList));
       }
-    },
-    deleteCompletedItems : function(){
+    };
+  this.deleteCompletedItems = function(){
       for (key in itemList){
         if (itemList[key]["status"] === true){
           delete itemList[key];
@@ -43,45 +42,13 @@ var ListAction = function() { // определяем возможные дей�
       };
       localStorage.setItem("toDoList", JSON.stringify(itemList));
     }
-  }
-}
+  };
+
 
 var ItemEntity = function (id){ //отрисовка задачи
-
-  var setStatus = function(){
-    itemList[id]["status"] = !(itemList[id]["status"]);
-    localStorage.setItem("toDoList", JSON.stringify(itemList));
-    state();
-  };
-  var deleteItem = function(){
-    delete itemList[id];
-    localStorage.setItem("toDoList", JSON.stringify(itemList));
-    wrapper.removeChild(event.target.parentNode);
-    state();
-  };
-  var editItem = function(){
-    item_text.hidden = true;
-    item_field.hidden = false;
-    item_field.value = item_text.innerHTML;
-  };
-
-  var saveNewValue = function(){
-    var key = event.which || event.keyCode;
-    if (key === 13){
-      item_text.hidden = false;
-      item_field.hidden = true;
-      if (item_field.value !== ""){
-        itemList[id]["title"] = item_field.value;
-        localStorage.setItem("toDoList", JSON.stringify(itemList));
-        item_text.innerHTML = item_field.value;
-        item_field.value = "";
-      }
-    }
-  };
-
   var wrapper = document.getElementById("wrapper");
-  
   var item = document.createElement('div');
+  item.id = id;
   item.setAttribute("class", "item");
   wrapper.appendChild(item);
 
@@ -107,19 +74,14 @@ var ItemEntity = function (id){ //отрисовка задачи
   item_delete.setAttribute("class", "item_delete");
   item_delete.innerHTML = "Delete";
   item.appendChild(item_delete);
-
-  item_status.addEventListener("click", setStatus);
-  item_text.addEventListener("dblclick", editItem);
-  item_field.addEventListener('keypress', saveNewValue);
-  item_delete.addEventListener("click", deleteItem);
   return item;
 }
 
-var getTask = function (func){//добавление задачи в список
+var getTask = function (setIDfunc){//добавление задачи в список
   return function(){
     var key = event.which || event.keyCode;
     if (key === 13 && document.querySelector(".todos_input").value !== "") { 
-      var id = func(document.querySelector(".todos_input").value);
+      var id = setIDfunc(document.querySelector(".todos_input").value);
       document.querySelector(".todos_input").value = "";
       ItemEntity(id);
       state();
@@ -199,8 +161,56 @@ var deleteCompletedWrapper = function (func){//удаление всех зак�
 function init(){
   var elem = new ListAction();
   for (key in itemList){
-    ItemEntity(key);
-  }
+    var item = ItemEntity(key);
+  };
+  
+  var wrapper = document.getElementById("wrapper");
+  wrapper.addEventListener('click', function(){
+    if (event.target.parentNode.className === "item"){
+      var item = event.target.parentNode;
+      switch (event.target.className){
+        case "item_status" : 
+          itemList[item.id]["status"] = !(itemList[item.id]["status"]);
+          break;
+        case "item_delete" : 
+          delete itemList[item.id];
+          this.removeChild(item);
+          break;
+      };
+      localStorage.setItem("toDoList", JSON.stringify(itemList));
+      state();
+    };
+  });
+  wrapper.addEventListener('dblclick', function(){
+    if (event.target.className === "item_text"){
+      var item = event.target.parentNode,
+       item_field = item.querySelector(".item_field"),
+       item_text = item.querySelector(".item_text");
+      event.target.hidden = true;
+      item_field.hidden = false;
+      item_field.value = item_text.innerHTML;
+    };
+  });
+
+  wrapper.addEventListener('keypress', function(){
+    if (event.target.className === "item_field"){
+      var item = event.target.parentNode,
+        item_field = item.querySelector(".item_field"),
+        item_text = item.querySelector(".item_text"),
+        key = event.which || event.keyCode;
+      if (key === 13){
+        item_text.hidden = false;
+        item_field.hidden = true;
+        if (item_field.value !== ""){
+          itemList[event.target.parentNode.id]["title"] = item_field.value;
+          localStorage.setItem("toDoList", JSON.stringify(itemList));
+          item_text.innerHTML = item_field.value;
+          item_field.value = "";
+        }
+    };
+  };
+  });
+
   showButtonsState();
   var showOption = showItems(elem);
   showOption();
