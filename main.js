@@ -2,13 +2,21 @@ var itemList = JSON.parse(localStorage.getItem("toDoList"));
 var showingState = JSON.parse(localStorage.getItem("toDoListShowState"));
 
 function init(){
+  if (itemList == null) {
+    itemList = {};
+    localStorage.setItem("toDoListShowState", JSON.stringify("all"));
+  }
+  else{
+    for (key in itemList){
+      var newItem = new ToDoItem(key);
+      newItem.setItem(itemList[key]["title"], itemList[key]["status"]);
+    }
+  };
+  state();
+  radioState();
   document.querySelector(".todos_input").addEventListener('keypress', function(){
     var key = event.which || event.keyCode;
       if (key === 13){
-        if (itemList == null) {
-          itemList = {};
-          localStorage.setItem("toDoListShowState", JSON.stringify("all"));
-        };
         var id = Date.now(),
             name = this.value;
         if (name !== ""){
@@ -17,87 +25,132 @@ function init(){
           var newItem = new ToDoItem(id);
           newItem.setItem(name, false);
           this.value = "";
-          // console.log(newItem);
+          state();
         };
       };
   });
 };
 
 var ToDoItem = function(id){ 
-      this.id = id;
-      var item = document.createElement('div');
-      item.setAttribute("class", "item");
-      document.getElementById("wrapper").appendChild(item);
-    
-      var item_status = document.createElement('input');
-      item_status.setAttribute("type", "checkbox");
-      item_status.setAttribute("class", "item_status");
-      item.appendChild(item_status);
-      this.item_status = item_status;
-    
-      var item_text = document.createElement('p');
-      item_text.setAttribute("class", "item_text");
-      item.appendChild(item_text);
-      this.item_text = item_text;
+  var item = document.createElement('div');
+  item.setAttribute("class", "item");
+  document.getElementById("wrapper").appendChild(item);
 
-      var item_field = document.createElement('input');
-      item_field.setAttribute("class", "item_field");
-      item_field.hidden = true;
-      item.appendChild(item_field);
-      this.item_field = item_field;
-    
-      var item_delete = document.createElement('button');
-      item_delete.setAttribute("class", "item_delete");
-      item_delete.innerHTML = "Delete";
-      item.appendChild(item_delete);
-    
-      item_status.addEventListener("click", this.changeElement().changeStatus);
-      item_text.addEventListener("dblclick", this.changeElement().editName);
-      item_field.addEventListener('keypress', this.changeElement().saveNewValue);
-      item_delete.addEventListener("click", this.changeElement().deleteItem);
-      // return item;
-      delete this.id;
+  var item_status = document.createElement('input');
+  item_status.setAttribute("type", "checkbox");
+  item_status.setAttribute("class", "item_status");
+  item.appendChild(item_status);
+  this.item_status = item_status;
+
+  var item_text = document.createElement('p');
+  item_text.setAttribute("class", "item_text");
+  item.appendChild(item_text);
+  this.item_text = item_text;
+
+  var item_field = document.createElement('input');
+  item_field.setAttribute("class", "item_field");
+  item_field.hidden = true;
+  item.appendChild(item_field);
+  this.item_field = item_field;
+
+  var item_delete = document.createElement('button');
+  item_delete.setAttribute("class", "item_delete");
+  item_delete.innerHTML = "Delete";
+  item.appendChild(item_delete);
+
+  var self = this;
+
+  item_status.addEventListener("click", function(){
+    return self.changeStatus(id);
+  });
+  item_text.addEventListener("dblclick", function(){
+    return self.editName(this);
+  });
+  item_field.addEventListener('keypress',  function(){
+    return self.saveNewValue(id, this);
+  });
+  item_delete.addEventListener("click",  function(){
+    return self.deleteItem(id);
+  });
 }
 
-ToDoItem.prototype.setItem = function(name, status){
-  this.item_text.innerHTML = name;
-  this.item_status.checked = status;
-};
-
-ToDoItem.prototype.changeElement = function(){
-  var id = this.id;
-  return {
-    changeStatus : function(){
+ToDoItem.prototype = {
+    constructor : ToDoItem,
+    setItem : function(name, status){
+      this.item_text.innerHTML = name;
+      this.item_status.checked = status;
+    },
+    changeStatus : function(id){
       itemList[id]["status"] = !(itemList[id]["status"]);
       localStorage.setItem("toDoList", JSON.stringify(itemList));
+      state();
     },
-    deleteItem : function(){
+    deleteItem : function(id){
       delete itemList[id];
       localStorage.setItem("toDoList", JSON.stringify(itemList));
       document.getElementById("wrapper").removeChild(event.target.parentNode);
+      state();
     },
-    editName : function(){
-      this.hidden = true;
-      this.nextSibling.hidden = false;
-      this.nextSibling.value = this.innerHTML;
+    editName : function(elem){
+      elem.hidden = true;
+      elem.nextSibling.hidden = false;
+      elem.nextSibling.value = elem.innerHTML;
     },
-    saveNewValue : function(){
+    saveNewValue : function(id, elem){
       var key = event.which || event.keyCode;
       if (key === 13){
-        this.previousSibling.hidden = false;
-        this.hidden = true;
-        if (this.value !== ""){
-          itemList[id]["title"] = this.value;
+        elem.previousSibling.hidden = false;
+        elem.hidden = true;
+        var newName = elem.value;
+        if (newName !== ""){
+          itemList[id]["title"] = newName;
           localStorage.setItem("toDoList", JSON.stringify(itemList));
-          this.previousSibling.innerHTML = this.value;
-          this.value = "";
+          elem.previousSibling.innerHTML = newName;
+          elem.value = "";
         };
       };
-    }
+    }  
   };
-}
+
+  // controller
+function state(){ 
+  var left = 0,
+      all = Object.keys(itemList).length,
+      mainCheckbox = document.querySelector(".statusAll");
+  for (key in itemList){
+    if (itemList[key]["status"] === false ){
+      left++;
+    };
+  };
+  document.querySelector("#undone").innerHTML = "Active tasks: " + left;
+  if (left == 0 && all !== 0){
+    mainCheckbox.checked = true;
+  } else {
+    mainCheckbox.checked = false;
+  };
+};
+
+//controller
+function radioState(){
+  switch(showingState){
+   case "all":
+     document.querySelector(".all").checked = true;
+     break;
+   case "active":
+     document.querySelector(".active").checked = true;
+     break;
+   case "completed":
+     document.querySelector(".completed").checked = true;
+     break;
+  }
+};
 
 
+
+
+
+
+  
 // var ListAction = function() { // определяем возможные действия над листом
 //   return {
 //     add : function(item){
@@ -302,38 +355,3 @@ ToDoItem.prototype.changeElement = function(){
 //   document.querySelector("#delete").addEventListener("click", deleteCompleted);
 // }
 
-// // controller
-// var state = function(){ 
-//   var items = JSON.parse(localStorage.getItem("toDoList"));
-//   var done = 0;
-//   var all = 0;
-//   for (key in items){
-//     if (items[key]["status"] === true ){
-//       done++;
-//     }
-//     all++;
-//   };
-//   var left = all - done;
-//   if (left == 0 && all !== 0){
-//     document.querySelector(".statusAll").checked = true;
-//   }
-//   else {
-//     document.querySelector(".statusAll").checked = false;
-//   }
-//   document.querySelector("#undone").innerHTML = "Active tasks: " + left;
-// };
-
-//  //controller
-//  function showButtonsState(){
-//   switch(JSON.parse(localStorage.getItem("toDoListShowState"))){
-//    case "all":
-//      document.querySelector(".all").checked = true;
-//      break;
-//    case "active":
-//      document.querySelector(".active").checked = true;
-//      break;
-//    case "completed":
-//      document.querySelector(".completed").checked = true;
-//      break;
-//   }
-// }
