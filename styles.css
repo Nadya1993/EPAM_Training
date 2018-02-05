@@ -52,7 +52,7 @@
     margin: 6px;
 }
 
-#delete{
+#deleteCompleted{
     border:none;
     outline: none;
     background: white;
@@ -71,10 +71,10 @@ label{
     margin: 3px 5px;
 }
 
-#delete:hover, label:hover{
+#deleteCompleted:hover, label:hover{
     border-bottom:1px solid #A9A9A9;
 }
-#delete:active{
+#deleteCompleted:active{
     border-bottom:1px solid #A9A9A9;
 }
 
