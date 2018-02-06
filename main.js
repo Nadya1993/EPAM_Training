@@ -56,9 +56,9 @@ function init(){
   });
 
   document.querySelector("#deleteCompleted").addEventListener("click", function(){
-    var wrapper = document.getElementById("wrapper");
-    var items = document.getElementsByClassName("item");
-    var counter = false;
+    var wrapper = document.getElementById("wrapper"),
+      items = document.getElementsByClassName("item"),
+      counter = false;
     while (counter === false) {
       counter = true;
       for (var key in itemList){
@@ -117,6 +117,9 @@ var ToDoItem = function(id){
   item_field.addEventListener('keypress',  function(){
     return self.saveNewValue(id, this);
   });
+  item_field.addEventListener('focusout',  function(){
+    return self.saveNewValue(id, this);
+  });
   item_delete.addEventListener("click",  function(){
     return self.deleteItem(id);
   });
@@ -144,10 +147,11 @@ ToDoItem.prototype = {
       elem.hidden = true;
       elem.nextSibling.hidden = false;
       elem.nextSibling.value = elem.innerHTML;
+      elem.nextSibling.focus();
     },
     saveNewValue : function(id, elem){
       var key = event.which || event.keyCode;
-      if (key === 13){
+      if (key === 13 || event.type === 'focusout'){
         elem.previousSibling.hidden = false;
         elem.hidden = true;
         var newName = elem.value;
